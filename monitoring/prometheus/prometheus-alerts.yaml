@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: prometheus-alerts
+  namespace: monitoring
+
+data:
+  alerts.yml: |
+    groups:
+    - name: node-alerts
+
+      rules:
+
+      - alert: HighCPUUsage
+
+        expr: |
+          100 - (
+            avg by(instance)(
+              irate(node_cpu_seconds_total{
+                mode="idle"
+              }[5m])
+            ) * 100
+          ) > 10
+
+        for: 1m
+
+        labels:
+          severity: warning
+
+        annotations:
+          summary: High CPU Usage
+          description: CPU usage is above 10%

@@ -1,0 +1,134 @@
+config:
+  auth_enabled: false
+
+  server:
+    http_listen_port: 8080
+
+  memberlist:
+    join_members:
+      - cortex-memberlist
+
+  distributor:
+    shard_by_all_labels: true
+
+  ingester:
+    lifecycler:
+      ring:
+        kvstore:
+          store: memberlist
+        replication_factor: 1
+
+  blocks_storage:
+    backend: s3
+
+    s3:
+      endpoint: minio.cortex.svc.cluster.local:9000
+      bucket_name: cortex
+      access_key_id: admin
+      secret_access_key: admin12345
+      insecure: true
+
+    tsdb:
+      dir: /data/tsdb
+
+  compactor:
+    data_dir: /data/compactor
+
+  alertmanager:
+    external_url: /alertmanager
+    fallback_config_file: /etc/alertmanager/alertmanager.yaml
+
+  alertmanager_storage:
+    backend: s3
+
+    s3:
+      endpoint: minio.cortex.svc.cluster.local:9000
+      bucket_name: cortex
+      access_key_id: admin
+      secret_access_key: admin12345
+      insecure: true
+
+  ruler:
+    enable_api: true
+    alertmanager_url: http://cortex-alertmanager.cortex.svc.cluster.local:8080/alertmanager
+ 
+  ruler_storage:
+    backend: s3
+
+    s3:
+      endpoint: minio.cortex.svc.cluster.local:9000
+      bucket_name: cortex
+      access_key_id: admin
+      secret_access_key: admin12345
+      insecure: true
+
+distributor:
+  replicas: 1
+
+ingester:
+  replicas: 1
+
+querier:
+  replicas: 1
+
+queryFrontend:
+  replicas: 1
+
+compactor:
+  replicas: 1
+  persistentVolume:
+    enabled: false
+
+store_gateway:
+  replicas: 1
+  persistentVolume:
+    enabled: false
+
+query_scheduler:
+  replicas: 0
+
+alertmanager:
+  enabled: true
+  replicas: 1
+  persistentVolume:
+    enabled: false
+  extraVolumes:
+    - name: alertmanager-config
+
+      secret:
+        secretName: alertmanager-config
+
+  extraVolumeMounts:
+    - name: alertmanager-config
+
+      mountPath: /etc/alertmanager
+
+ruler:
+  enabled: true
+  replicas: 1
+  persistentVolume:
+    enabled: false
+  directories: {}
+  storage:
+    type: local
+    local:
+      directory: /rules
+
+minio:
+  enabled: false
+
+memcached-frontend:
+  enabled: false
+
+memcached-blocks:
+  enabled: false
+
+memcached-blocks-index:
+  enabled: false
+
+memcached-blocks-metadata:
+  enabled: false
+
+nginx:
+  enabled: true
+  replicas: 1

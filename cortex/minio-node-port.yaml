@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  name: minio-node-port
+  namespace: cortex
+spec:
+  ports:
+  - port: 9001
+    protocol: TCP
+    targetPort: 9001
+    nodePort: 30001
+  selector:
+    app: minio
+  type: NodePort
+status:
+  loadBalancer: {}

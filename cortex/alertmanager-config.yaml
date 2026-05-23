@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Secret
+
+metadata:
+  name: alertmanager-config
+  namespace: cortex
+
+stringData:
+  alertmanager.yaml: |
+    route:
+      receiver: "default"
+
+    receivers:
+      - name: "default"
