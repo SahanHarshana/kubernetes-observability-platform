@@ -6,7 +6,7 @@ config:
 
   memberlist:
     join_members:
-      - cortex-memberlist
+      - cortex-helm-app-memberlist
 
   distributor:
     shard_by_all_labels: true

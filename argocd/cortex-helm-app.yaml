@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: cortex-helm-app
+  namespace: argocd
+
+spec:
+  project: default
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cortex
+
+  sources:
+
+    - repoURL: https://cortexproject.github.io/cortex-helm-chart
+      chart: cortex
+      targetRevision: 3.3.0
+
+      helm:
+        valueFiles:
+          - $values/cortex/cortex-values.yaml
+
+    - repoURL: https://github.com/SahanHarshana/kubernetes-observability-platform.git
+      targetRevision: main
+      ref: values
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true
