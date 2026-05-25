@@ -23,4 +23,4 @@ data:
               - 192.168.100.12:9100
 
     remote_write:
-      - url: http://cortex-nginx.cortex.svc.cluster.local/api/prom/push
+      - url: http://cortex-helm-app-nginx.cortex.svc.cluster.local/api/v1/push
