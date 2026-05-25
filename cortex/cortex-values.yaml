@@ -50,7 +50,7 @@ config:
 
   ruler:
     enable_api: true
-    alertmanager_url: http://cortex-alertmanager.cortex.svc.cluster.local:8080/alertmanager
+    alertmanager_url: http://cortex-helm-app-alertmanager.cortex.svc.cluster.local:8080/alertmanager
  
   ruler_storage:
     backend: s3
