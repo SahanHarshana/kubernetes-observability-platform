@@ -109,10 +109,6 @@ ruler:
   persistentVolume:
     enabled: false
   directories: {}
-  storage:
-    type: local
-    local:
-      directory: /rules
 
 minio:
   enabled: false
