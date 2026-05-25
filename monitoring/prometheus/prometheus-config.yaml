@@ -15,5 +15,12 @@ data:
           - targets:
               - localhost:9090
 
+      - job_name: 'node-exporter'
+        static_configs:
+          - targets:
+              - 192.168.100.10:9100
+              - 192.168.100.11:9100
+              - 192.168.100.12:9100
+
     remote_write:
       - url: http://cortex-nginx.cortex.svc.cluster.local/api/prom/push
