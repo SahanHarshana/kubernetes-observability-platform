@@ -3,23 +3,24 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    app.kubernetes.io/component: nginx
-    app.kubernetes.io/instance: cortex
+    app.kubernetes.io/component: alertmanager
+    app.kubernetes.io/instance: cortex-helm-app
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cortex
+    app.kubernetes.io/part-of: memberlist
     app.kubernetes.io/version: v1.21.0
     helm.sh/chart: cortex-3.3.0
-  name: nginx-node-port
+  name: alertmanager-nodeport
   namespace: cortex
 spec:
   ports:
-  - port: 80
+  - port: 8080
     protocol: TCP
-    targetPort: 80
-    nodePort: 30002
+    targetPort: 8080
+    nodePort: 30006
   selector:
-    app.kubernetes.io/component: nginx
-    app.kubernetes.io/instance: cortex
+    app.kubernetes.io/component: alertmanager
+    app.kubernetes.io/instance: cortex-helm-app
     app.kubernetes.io/name: cortex
   type: NodePort
 status:
