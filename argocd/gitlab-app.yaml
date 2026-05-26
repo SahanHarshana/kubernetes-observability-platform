@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://charts.gitlab.io
     chart: gitlab
-    targetRevision: 8.10.0
+    targetRevision: 7.11.2
 
     helm:
       valueFiles:
@@ -20,7 +20,7 @@ spec:
   sources:
     - repoURL: https://charts.gitlab.io
       chart: gitlab
-      targetRevision: 8.10.0
+      targetRevision: 7.11.2
 
       helm:
         valueFiles:
