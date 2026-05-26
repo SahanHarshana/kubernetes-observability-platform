@@ -22,6 +22,9 @@ grafana:
 nginx-ingress:
   enabled: false
 
+upgradeCheck:
+  enabled: false
+
 gitlab:
   webservice:
     minReplicas: 1
