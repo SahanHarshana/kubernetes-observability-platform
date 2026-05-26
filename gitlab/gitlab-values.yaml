@@ -1,0 +1,37 @@
+global:
+  edition: ce
+
+  hosts:
+    domain: local
+
+  ingress:
+    configureCertmanager: false
+
+certmanager:
+  install: false
+
+gitlab-runner:
+  install: false
+
+prometheus:
+  install: false
+
+grafana:
+  enabled: false
+
+nginx-ingress:
+  enabled: false
+
+gitlab:
+  webservice:
+    minReplicas: 1
+
+postgresql:
+  primary:
+    persistence:
+      enabled: false
+
+redis:
+  master:
+    persistence:
+      enabled: false
